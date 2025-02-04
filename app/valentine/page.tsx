@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Confetti from 'react-confetti';
-import { useWindowSize } from "react-use"
+import useWindowSize from 'react-use/lib/useWindowSize';
 
 const ValentinePage = () => {
   const [yesPressed, setYesPressed] = useState(false);
@@ -11,9 +11,9 @@ const ValentinePage = () => {
   const { width, height } = useWindowSize();
 
   const handleYes = () => {
-    setYesPressed(true);
     // Logic to send email
     setEmailSent(true);
+    setYesPressed(true);
   };
 
   const handleNo = () => {
@@ -26,7 +26,7 @@ const ValentinePage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100">
-      {yesPressed && <Confetti width={width} height={height} />}
+      {emailSent && <Confetti width={width} height={height} />}
       <div className="text-center">
         <h1 className="text-4xl font-bold text-red-600 mb-4">My dearest Ada 💖</h1>
         {noCount > 0 && !yesPressed && (
