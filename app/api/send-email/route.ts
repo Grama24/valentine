@@ -1,6 +1,6 @@
 import { Resend } from "resend"
 
-const resend = new Resend("re_3gCkNUNc_2o1v3g3gxbLuFc3grtNH4HUu")
+const resend = new Resend("re_4CVWvKLN_7CT23k61tGffsAhvNhWzvDYc")
 
 export async function POST() {
   try {
@@ -13,7 +13,7 @@ export async function POST() {
         <p>I'm so happy you said yes to being my Valentine! To celebrate, I've planned a special evening for us.</p>
         <h2>Reservation Details:</h2>
         <ul>
-          <li><strong>Restaurant:</strong> Ave SkyBar Forchetta</li>
+          <li><strong>Restaurant:</strong> Ave Forchetta</li>
           <li><strong>Address:</strong> "Nu te intereseaza conduce Pookster orium"</li>
           <li><strong>Date:</strong> Valentine's Day</li>
           <li><strong>Time:</strong> 21:30</li>

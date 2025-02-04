@@ -46,11 +46,11 @@ export default function HomePage() {
 
     return () => clearInterval(interval)
   }, [])
-5
+
   const photos = [
     { title: "Budapest 🥰", description: "Our magical trip to Budapest", image:Budapesta},
     { title: "Greece 🏖️", description: "Enjoying the sun and sea together", image:Grecia},
-    { title: "Bulglaria", description: "Our 3rd country visited togheter", image:Bulgaria},
+    { title: "Bulglaria", description: "Our 3rd country visited together", image:Bulgaria},
     { title: "And...", description: "many more to come ...", image:Many},
   ]
 
@@ -66,7 +66,7 @@ export default function HomePage() {
           style={{ objectFit: 'cover', transform: 'scale(1.35)', rotate:'90deg' }} 
         />
       </div>
-      <h1 className="text-3xl font-bold text-red-600 mb-2">Ada and Andrei's Love Story ❤️💑🌹</h1>
+      <h1 className="text-3xl font-bold text-red-600 mb-2">Ada and Andrei&apos;s Love Story </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl mt-8">
         <Card>
@@ -88,7 +88,7 @@ export default function HomePage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>We've been together for: 💖</CardTitle>
+            <CardTitle>We have been together for:</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold animate-pulse">
