@@ -70,7 +70,7 @@ export default function ValentinePage() {
         ) : (
           <div className="animate-pulse">
             <p className="text-2xl text-red-600 mb-4">
-              Of course Pookie said yes! 🎉 That's why I already booked a romantic dinner. 🍽️
+              Of course Pookie said yes! 🎉 That is why I already booked a romantic dinner. 🍽️
             </p>
             <p className="text-xl text-red-500">
               {emailSent
