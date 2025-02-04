@@ -1,101 +1,157 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import Profil from "../app/assets/profil.jpg"
+import Grecia from "../app/assets/greece.jpg"
+import Budapesta from "../app/assets/budapest.jpg"
+import Bulgaria from "../app/assets/bulgaria.jpg"
+import Many from "../app/assets/many.jpg"
+
+export default function HomePage() {
+  const [timeTogether, setTimeTogether] = useState({ years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 })
+
+  useEffect(() => {
+    const startDate = new Date("2023-04-04T00:00:00")
+
+    const updateTimer = () => {
+      const now = new Date()
+      let years = now.getFullYear() - startDate.getFullYear()
+      let months = now.getMonth() - startDate.getMonth()
+      let days = now.getDate() - startDate.getDate()
+
+      if (months < 0 || (months === 0 && days < 0)) {
+        years--
+        months += 12
+      }
+
+      if (days < 0) {
+        const prevMonthLastDay = new Date(now.getFullYear(), now.getMonth(), 0).getDate()
+        days += prevMonthLastDay
+        months--
+      }
+
+      const hours = now.getHours()
+      const minutes = now.getMinutes()
+      const seconds = now.getSeconds()
+
+      setTimeTogether({ years, months, days, hours, minutes, seconds })
+    }
+
+    updateTimer()
+    const interval = setInterval(updateTimer, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+5
+  const photos = [
+    { title: "Budapest 🥰", description: "Our magical trip to Budapest", image:Budapesta},
+    { title: "Greece 🏖️", description: "Enjoying the sun and sea together", image:Grecia},
+    { title: "Bulglaria", description: "Our 3rd country visited togheter", image:Bulgaria},
+    { title: "And...", description: "many more to come ...", image:Many},
+  ]
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-50 p-4">
+      <div className="w-48 h-48 rounded-full overflow-hidden mb-4 border-4 border-red-400">
+        <Image 
+          src={Profil.src} 
+          alt="Ada and Andrei" 
+          width={200} 
+          height={200} 
+          className="object-cover" 
+          style={{ objectFit: 'cover', transform: 'scale(1.35)', rotate:'90deg' }} 
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      </div>
+      <h1 className="text-3xl font-bold text-red-600 mb-2">Ada and Andrei's Love Story ❤️💑🌹</h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl mt-8">
+        <Card>
+          <CardHeader>
+            <CardTitle>Our First Date 🥰</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2847.6003443791747!2d26.0920080767888!3d44.46186567107526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b202086920c463%3A0xd506bb24af3425df!2sNuba%20Cafe!5e0!3m2!1sro!2sro!4v1738671993018!5m2!1sro!2sro"
+              width="100%"
+              height="300"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>We've been together for: 💖</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold animate-pulse">
+              <p>
+                {timeTogether.years} {timeTogether.years === 1 ? "year" : "years"} 🎂
+              </p>
+              <p>
+                {timeTogether.months} {timeTogether.months === 1 ? "month" : "months"} 📅
+              </p>
+              <p>
+                {timeTogether.days} {timeTogether.days === 1 ? "day" : "days"} 🌞
+              </p>
+              <p>
+                {timeTogether.hours} {timeTogether.hours === 1 ? "hour" : "hours"} ⏰
+              </p>
+              <p>
+                {timeTogether.minutes} {timeTogether.minutes === 1 ? "minute" : "minutes"} ⏱️
+              </p>
+              <p>
+                {timeTogether.seconds} {timeTogether.seconds === 1 ? "second" : "seconds"} ⚡
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card className="w-full max-w-4xl mt-4">
+        <CardHeader>
+          <CardTitle>Our Memories 📸</CardTitle>
+        </CardHeader>
+        <CardContent className="relative">
+          <Carousel>
+            <CarouselContent>
+              {photos.map((photo, index) => (
+                <CarouselItem key={index}>
+                  <div className="p-1">
+                    <Card>
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <div>
+                          <h3 className="text-xl font-semibold">{photo.title}</h3>
+                          <p>{photo.description}</p>
+                          <Image src={photo.image.src} alt={photo.title} width={300} height={200} className="mt-2" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2" />
+            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2" />
+          </Carousel>
+        </CardContent>
+      </Card>
+
+      <Link href="/valentine" className="mt-8 mb-8">
+        <Card className="bg-pink-200 hover:bg-pink-300 transition-colors cursor-pointer">
+          <CardContent className="flex items-center justify-center p-6">
+            <p className="text-xl font-semibold">Surprise! Tap to open 🎁💖</p>
+          </CardContent>
+        </Card>
+      </Link>
     </div>
-  );
+  )
 }
+
