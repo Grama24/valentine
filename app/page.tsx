@@ -63,7 +63,7 @@ export default function HomePage() {
           width={200} 
           height={200} 
           className="object-cover" 
-          style={{ objectFit: 'cover', transform: 'scale(1.35)', rotate:'90deg' }} 
+          style={{ objectFit: 'cover', transform: 'scale(1.35)' }} 
         />
       </div>
       <h1 className="text-3xl font-bold text-red-600 mb-2">Ada and Andrei&apos;s Love Story </h1>

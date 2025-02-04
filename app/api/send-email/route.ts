@@ -6,7 +6,7 @@ export async function POST() {
   try {
     const data = await resend.emails.send({
       from: "Andrei <onboarding@resend.dev>", // Replace with your verified sender
-      to: ["andralcarimioara3@gmail.com"], // Replace with Ada's actual email
+      to: ["andralacrimioara3@gmail.com"], // Replace with Ada's actual email
       subject: "Our Romantic Valentine's Dinner",
       html: `
         <h1>My Dearest Pookie,</h1>
