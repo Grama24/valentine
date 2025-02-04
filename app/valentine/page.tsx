@@ -1,32 +1,48 @@
 "use client"
 
-import React, { useState } from 'react';
-import Confetti from 'react-confetti';
-import useWindowSize from 'react-use/lib/useWindowSize';
+import { useState } from "react"
+import Confetti from "react-confetti"
+import { useWindowSize } from "react-use"
 
-const ValentinePage = () => {
-  const [yesPressed, setYesPressed] = useState(false);
-  const [noCount, setNoCount] = useState(0);
-  const [emailSent, setEmailSent] = useState(false);
-  const { width, height } = useWindowSize();
+export default function ValentinePage() {
+  const [noCount, setNoCount] = useState(0)
+  const [yesPressed, setYesPressed] = useState(false)
+  const [emailSent, setEmailSent] = useState(false)
+  const { width, height } = useWindowSize()
 
-  const handleYes = () => {
-    // Logic to send email
-    setEmailSent(true);
-    setYesPressed(true);
-  };
+  const handleYes = async () => {
+    setYesPressed(true)
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+      })
+      const data = await response.json()
+      if (response.ok) {
+        console.log("Email sent successfully:", data)
+        setEmailSent(true)
+      } else {
+        console.error("Failed to send email:", data)
+        setEmailSent(false)
+      }
+    } catch (error) {
+      console.error("Error sending email:", error)
+      setEmailSent(false)
+    }
+  }
 
   const handleNo = () => {
-    setNoCount(noCount + 1);
-  };
+    setNoCount(noCount + 1)
+  }
 
   const getYesButtonSize = () => {
-    return 2 + noCount * 0.5;
-  };
+    const baseSize = 1
+    const increaseFactor = 0.1
+    return baseSize + noCount * increaseFactor
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100">
-      {emailSent && <Confetti width={width} height={height} />}
+      {yesPressed && <Confetti width={width} height={height} />}
       <div className="text-center">
         <h1 className="text-4xl font-bold text-red-600 mb-4">My dearest Ada 💖</h1>
         {noCount > 0 && !yesPressed && (
@@ -54,19 +70,17 @@ const ValentinePage = () => {
         ) : (
           <div className="animate-pulse">
             <p className="text-2xl text-red-600 mb-4">
-              Of course Pookie said yes! That&apos;s why I already booked a romantic dinner. 🍽️
+              Of course Pookie said yes! 🎉 That's why I already booked a romantic dinner. 🍽️
             </p>
             <p className="text-xl text-red-500">
               {emailSent
                 ? "Check your email for the details. 💌"
-                : "Oops! There was an issue sending the email. But don&apos;t worry, I&apos;ll tell you all about our plans! 💕"}
+                : "Oops! There was an issue sending the email. But don't worry, I'll tell you all about our plans! 💕"}
             </p>
           </div>
         )}
       </div>
     </div>
-  );
-};
-
-export default ValentinePage;
+  )
+}
 
